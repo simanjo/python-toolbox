@@ -1,6 +1,8 @@
 #%%
 import hashlib
 import warnings
+import subprocess
+
 
 def get_file_hash(fname, chunksize=4096, algo='blake2b'):
     # based on a post by quantumSoup (https://stackoverflow.com/a/3431838)
@@ -23,8 +25,8 @@ def get_file_hash(fname, chunksize=4096, algo='blake2b'):
         for chunk in iter(lambda: f.read(chunksize), b''):
             hash_func.update(chunk)
     return hash_func.hexdigest()
-# %%
-import subprocess
+
+
 def get_git_revision_hash() -> str:
     # Copyright 2014 Yuji 'Tomita' Tomita (https://stackoverflow.com/a/21901260)
     # CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/
