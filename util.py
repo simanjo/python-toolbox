@@ -1,4 +1,3 @@
-#%%
 import hashlib
 import warnings
 import subprocess
@@ -19,7 +18,7 @@ def get_file_hash(fname, chunksize=4096, algo='blake2b'):
     else:
         msg = f"The supplied hash-algorithm {algo} is not supported. " \
             + "Consider using \'blake2b\' or \'sha3\'."
-        raise(ValueError(msg))
+        raise ValueError(msg)
 
     with open(fname, 'rb') as f:
         for chunk in iter(lambda: f.read(chunksize), b''):
