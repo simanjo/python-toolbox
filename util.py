@@ -11,7 +11,7 @@ def get_file_hash(fname, chunksize=4096, algo='blake2b'):
     elif algo == 'md5':
         # deprecated, but available for backward compatibility
         msg = [
-            f"MD5 checksum is deprecated.",
+            "MD5 checksum is deprecated.",
             "Consider using \'blake2b\' or \'sha3\'"
         ]
         warnings.warn(" ".join(msg), DeprecationWarning)
