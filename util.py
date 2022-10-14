@@ -10,15 +10,20 @@ def get_file_hash(fname, chunksize=4096, algo='blake2b'):
         hash_func = hashlib.blake2b()
     elif algo == 'md5':
         # deprecated, but available for backward compatibility
-        msg = f"MD5 checksum is deprecated. Consider using \'blake2b\' or \'sha3\'"
-        warnings.warn(msg, DeprecationWarning)
+        msg = [
+            f"MD5 checksum is deprecated.",
+            "Consider using \'blake2b\' or \'sha3\'"
+        ]
+        warnings.warn(" ".join(msg), DeprecationWarning)
         hash_func = hashlib.md5()
     elif algo == 'sha3':
         hash_func = hashlib.sha3_512()
     else:
-        msg = f"The supplied hash-algorithm {algo} is not supported. " \
-            + "Consider using \'blake2b\' or \'sha3\'."
-        raise ValueError(msg)
+        msg = [
+            f"The supplied hash-algorithm {algo} is not supported.",
+            "Consider using \'blake2b\' or \'sha3\'."
+        ]
+        raise ValueError(" ".join(msg))
 
     with open(fname, 'rb') as f:
         for chunk in iter(lambda: f.read(chunksize), b''):
@@ -27,6 +32,8 @@ def get_file_hash(fname, chunksize=4096, algo='blake2b'):
 
 
 def get_git_revision_hash() -> str:
-    # Copyright 2014 Yuji 'Tomita' Tomita (https://stackoverflow.com/a/21901260)
+    # Copyright 2014 Yuji 'Tomita' Tomita
+    # (https://stackoverflow.com/a/21901260)
     # CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/
-    return subprocess.check_output(['git', 'rev-parse', 'HEAD']).decode('ascii').strip()
+    cmd = ['git', 'rev-parse', 'HEAD']
+    return subprocess.check_output(cmd).decode('ascii').strip()
