@@ -4,7 +4,7 @@ import subprocess
 from typing import List, Optional
 
 
-def get_file_hash(fname, chunksize=4096, algo='blake2b'):
+def get_file_hash(fname, chunksize=128*1024, algo='blake2b'):
     # based on a post by quantumSoup (https://stackoverflow.com/a/3431838)
     # CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/
     if algo == 'blake2b':
